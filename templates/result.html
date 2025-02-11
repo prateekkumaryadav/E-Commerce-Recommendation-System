@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Showing Result for Product : {{ prod_name }}</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="content" style="margin: 20px;">
+  <div class="alert alert-success" role="alert">
+    Showing Result for : <strong>{{ prod_name }}</strong>
+  </div>
+
+  <div style="width: 90%; margin: auto;" class="row row-cols-1 row-cols-md-4 g-4">
+    {% for i in range(20) %}
+      {% if brand[i] %}
+        <div class="col">
+          <div class="card prod-card h-100">
+              <img src="{{ img[i] }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h4 class="card-title">{{ brand[i] }}</h4>
+                <p>{{ title[i] }}</p>
+                <p>$<strong style="font-size: 20px;">{{ price[i] }}</strong></p>
+                {% if i==2 or (i%2==0 and i%3==0) %}
+                <p>MRP: <strike>${{ (price[i]*1.20)//1 }}</strike> (20% off)</p>
+                <span class="badge bg-danger w-100" style="font-size: 14px;">Limited Time offer</span>
+                {% endif %}
+                <div class="py-2">
+                  <a style="text-decoration:none; color: black;" target="_blank" href="{{ url[i] }}">
+                    <span class="badge bg-warning w-100" style="font-size: 14px;">
+                      shop Now
+                    </span>
+                  </a>
+                </div>
+                <div class="py-3"></div>
+                <form action="{{ url_for('result') }}" method="POST" class="w-80">
+                  <div class="input-group m-100">
+                    <h6 class="text-center w-100">View Similar Products:</h6>
+                    <input class="text-center rounded w-100 overflow-hidden btn btn-outline-success" type="submit" name="product_name" value="{{ title[i] }}"></input>
+                  </div>
+                </form>
+              </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+  <!-- <div class="p-2"></div> -->
+{% endblock %}

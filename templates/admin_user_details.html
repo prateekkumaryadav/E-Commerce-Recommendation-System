@@ -1,0 +1,62 @@
+{% extends 'admin_base.html' %}
+
+{% block head %}
+<title>{{user}}'s Profile</title>
+{% endblock %}
+
+{% block body %}
+<div class="p-3"></div>
+<div style="width: 60%; margin: auto;">
+    <div class="col">
+        <div class="card h-100">
+            <div class="p-3"></div>
+            {% if user %}
+            {% if user == 'prateek' %}
+            <img src="static/images/user/prateek.jpg" class="card-img-top p-1" alt="..." style="width: 60%; margin: auto;">
+            {% endif %}
+            {% if user == 'aadarsh' %}
+            <img src="static/images/user/aadarsh.jpg" class="card-img-top p-1" alt="..." style="width: 60%; margin: auto;">
+            {% endif %}
+            {% if user == 'guest_user' %}
+            <img src="static/images/user/guest.jpg" class="card-img-top p-1" alt="..." style="width: 60%; margin: auto;">
+            {% endif %}
+            {% endif %}
+            <div class="card-body m-auto">
+                <h1 style="text-align: center; font-family:'Comic Sans MS';" class="card-title">{{ user }}</h1>
+            </div>
+            <h4 class="text-center">Search History: </h4>
+            <div class="list-group overflow-auto" style="height: 200px; width: 90%; margin: auto;">
+                {% if last_search[-1] %}
+                <a class="list-group-item list-group-item-action">
+                    <span class="badge m-100 w-100 bg-danger"><h6>Most Recent</h6></span>
+                    <div></div>
+                    {{ last_search[-1] }}
+                </a>
+                {% endif %}
+                {% if last_search[-1]==null %}
+                <h2 class="text-center list-group-item list-group-item-action">
+                    <span class="badge bg-danger">Yet to search a Product</span>
+                </h2>
+                {% endif %}
+                {% for i in range(2,30) %}
+                {% if last_search[-i] %}
+                <a class="list-group-item list-group-item-action">{{ last_search[-i] }}</a>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="p-3"></div>
+        </div>
+    </div>
+    <div class="p-3"></div>
+    <div class="card h-100">
+        <div class="card-body">
+        <form action="{{ url_for('delete') }}" method="POST">
+            <h4 class="text-center">Clear history for: </h4>
+            <input class="btn btn-secondary btn-outline-warning btn-lg m-auto w-100" type="submit" name="user_name" value="{{user}}">
+        </form>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="p-4"></div> -->
+{% endblock %}

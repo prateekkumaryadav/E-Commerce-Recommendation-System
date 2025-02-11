@@ -1,0 +1,27 @@
+/* html{
+    background-color: #212529;
+    color: white;
+}
+
+body{
+    font-family: sans-serif;
+}
+
+h1{
+    text-align: center;
+}
+
+table, th, td{
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+} */
+img { 
+    pointer-events: none;
+}
+
+.search-btn:hover, .prod-card:hover{
+    transform: scale(1.05);
+}

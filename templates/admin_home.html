@@ -1,0 +1,46 @@
+{% extends 'admin_base.html' %}
+
+{% block head %}
+<title>Admin Dashboard</title>
+{% endblock %}
+
+{% block body %}
+{% if deletion_done==1 %}
+<div class="alert alert-success alert-dismissible fade show" style="margin: 20px;" role="alert">
+  <h4 class="text-center" style="font-family: Comic Sans MS;">History<strong> cleared </strong>successfully for {{user_history_deleted}}</h4>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+  <div class="p-2"></div>
+  <h2 class="text-center w-100" style="color: azure;font-family: sans-serif">Admin Dashboard</h2>
+
+  <div style="width: 90%; margin: auto;" class="row row-cols-1 row-cols-md-3 g-3">
+    {% for i in range(total_users) %}
+    <div class="col mb-2">
+      <!-- <div class="py-2"></div> -->
+      <div class="card prod-card h-100">
+        {% if(users[i]=="prateek") %}
+        <img src="static/images/user/prateek.jpg" class="card-img-top p-4" alt="...">
+        {% endif %}
+        {% if(users[i]=="aadarsh") %}
+        <img src="static/images/user/aadarsh.jpg" class="card-img-top p-4" alt="...">
+        {% endif %}
+        {% if(users[i]=="guest_user") %}
+        <img src="static/images/user/guest.jpg" class="card-img-top p-4" alt="...">
+        {% endif %}
+        <div class="card-body">
+          <h6 class="card-title"><strong>Name: </strong>{{users[i]}}</h6>
+          <p><strong>Last Logged in: </strong>{{ login_time[i] }}</p>
+          <h6 class="text-center">More About: </h6>
+          <form action="{{ url_for('user_details') }}" method="POST" class="w-80">
+            <div class="input-group m-100">
+              <input class="text-center rounded w-100 mx-auto btn btn-outline-warning" type="submit" name="user_profile" value="{{ users[i] }}"></input>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

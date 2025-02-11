@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Shop by Brand</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="list-group overflow-auto" style="height: 730px; width: 90%; margin: auto;">
+    <form action="{{ url_for('shopping_from_brand') }}" method="POST" class="p-2 w-100 d-flex">
+        <div style="mix-blend-mode:multiply; margin: auto;" class="d-grid w-100">
+            {% for i in range(total_brands) %}
+            {% if brand_names[i] %}
+            <div class="text-center btn list-group-item list-group-item-action">
+                    <input style="color:dodgerblue; font-size: 23px; font-family: Comic Sans MS;" class="btn btn-light w-100" name="brand_name" type="submit" value="{{ brand_names[i] }}" >
+                </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </form>
+</div>
+{% endblock %}
